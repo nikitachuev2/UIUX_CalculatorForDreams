@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Установить Цели</title>
     <style>
         body {
@@ -23,6 +23,21 @@
         .goal-empty {
             color: #999;
         }
+        /* Стиль для кнопки калькулятора */
+        .calc-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .calc-button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -39,15 +54,18 @@
         {% else %}
             <h2 class="goal-empty">У вас нет установленной цели.</h2>
         {% endif %}
+        <!-- Ссылка на кредитный калькулятор -->
+        <a href="{{ url_for('loan_calculator') }}" class="calc-button">Рассчитать кредит</a>
     </div>
 
     <form method="POST">
         {{ form.hidden_tag() }}
         <label for="dream_name">Название мечты:</label>
-        <input type="text" name="dream_name" required><br>
-        {{ form.target_amount.label }} {{ form.target_amount(size=32) }}<br>
+        <input type="text" id="dream_name" name="dream_name" required><br><br>
+        {{ form.target_amount.label }} {{ form.target_amount(size=32) }}<br><br>
         {{ form.submit() }}
     </form>
+    <br>
     <a href="{{ url_for('home') }}">Вернуться на главную страницу</a>
 </body>
 </html>

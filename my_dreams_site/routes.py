@@ -112,6 +112,43 @@ def goals():
     return render_template('goals.html', form=form, goal=current_goal, current_amount=current_amount)
 
 
+@app.route('/loan_calculator', methods=['GET', 'POST'])
+def loan_calculator():
+    error = None
+    results = None
+    
+    if request.method == 'POST':
+        try:
+            # Получаем данные формы
+            P = float(request.form['loan_amount'])
+            n = int(request.form['period_months'])
+            annual_rate = float(request.form['annual_rate'])
+            if P <= 0 or n <= 0 or annual_rate < 0:
+                error = "Пожалуйста, введите корректные значения."
+            else:
+                # Расчет
+                i = annual_rate / 100 / 12  # месячная ставка
+                if i == 0:
+                    monthly_payment = P / n
+                else:
+                    monthly_payment = P * (i / (1 - (1 + i) ** (-n)))
+                total_payment = monthly_payment * n
+                overpayment = total_payment - P
+
+                results = {
+                    'monthly_payment': f"{monthly_payment:,.2f}".replace(',', ' '),
+                    'total_payment': f"{total_payment:,.2f}".replace(',', ' '),
+                    'overpayment': f"{overpayment:,.2f}".replace(',', ' '),
+                    'period_months': n,
+                    'annual_rate': f"{annual_rate:.2f}"
+                }
+        except ValueError:
+            error = 'Некорректный формат данных.'
+
+    return render_template('loan_calculator.html', results=results, error=error)
+
+
+
 @app.route("/add_contribution", methods=['GET', 'POST'])
 @login_required
 def add_contribution():
@@ -131,18 +168,24 @@ def goal_progress(goal_id):
     progress = (goal.current_amount / goal.target_amount) * 100 if goal.target_amount > 0 else 0
     return render_template('goal_progress.html', progress=progress, goal=goal)
 
+
+
 @app.route("/expense_analysis", methods=['GET'])
 @login_required
 def expense_analysis():
     last_month = datetime.now() - timedelta(days=30)
     purchases_last_month = Purchase.query.filter(Purchase.owner == current_user, Purchase.timestamp >= last_month).all()
     category_totals = {}
+    total_expense = 0
     for purchase in purchases_last_month:
         if purchase.category in category_totals:
             category_totals[purchase.category] += purchase.amount
         else:
             category_totals[purchase.category] = purchase.amount
-    return render_template('expense_analysis.html', category_totals=category_totals)
+        total_expense += purchase.amount
+    return render_template('expense_analysis.html', category_totals=category_totals, total_expense=total_expense)
+
+
 
 @app.route("/income_distribution", methods=['GET'])
 @login_required
