@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Analysis</title>
+</head>
+<body>
+    <h1>Анализ Ваших Расходов</h1>
+    <p>Здесь вы можете увидеть, как вы тратили свои деньги за последний месяц. Это важно для контроля бюджета!</p>
+    <ul>
+        {% for category, total in category_totals.items() %}
+            <li>Категория "{{ category }}": {{ total }} рублей</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('home') }}">Вернуться на главную страницу</a>
+</body>
+</html>

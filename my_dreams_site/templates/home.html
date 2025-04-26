@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+</head>
+<body>
+    <h1>Добро пожаловать в Ваше Финансовое Управление!</h1>
+    <h2>Ваш баланс: {{ balance }} рублей</h2>
+    <nav>
+        <h3>Что вы хотите сделать?</h3>
+        <ul>
+            <li><a href="{{ url_for('add_purchase') }}">Добавить покупку</a> - отслеживайте свои расходы по категориям.</li>
+            <li><a href="{{ url_for('goals') }}">Установить Цели</a> - определите свои мечты и накопите на них.</li>
+            <li><a href="{{ url_for('add_contribution') }}">Добавить Внесение Средств</a> - пополните свои накопления.</li>
+            <li><a href="{{ url_for('income_distribution') }}">Распределение Дохода</a> - узнайте, как лучше распределить свои средства.</li>
+            <li><a href="{{ url_for('expense_analysis') }}">Анализ Расходов</a> - изучите свои расходы за последний месяц.</li>
+        </ul>
+        <a href="{{ url_for('logout') }}">Выйти</a>
+    </nav>
+</body>
+</html>
