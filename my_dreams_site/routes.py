@@ -199,3 +199,9 @@ def income_distribution():
     dreams = total_income * 0.30      # 30% на мечты
     
     return render_template('income_distribution.html', total_income=total_income, savings=savings, consumption=consumption, dreams=dreams)
+
+
+@app.route('/under_construction')
+def under_construction():
+    return render_template('under_construction.html')
+

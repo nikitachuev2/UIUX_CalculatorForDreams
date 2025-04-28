@@ -19,7 +19,7 @@
     <h2>Удалить ваши сбережения</h2>
     <p>Укажите сумму, которую вы хотите удалить из своих накоплений. Это действие необратимо!</p>
 
-    <form method="POST" action="#">
+    <form method="GET" action="{{ url_for('under_construction') }}">
         <label for="remove_amount">Сумма для удаления:</label>
         <input type="number" step="0.01" name="remove_amount" required>
         <button type="submit">Удалить средства</button>
@@ -28,3 +28,4 @@
     <a href="{{ url_for('home') }}">Вернуться на главную страницу</a>
 </body>
 </html>
+
