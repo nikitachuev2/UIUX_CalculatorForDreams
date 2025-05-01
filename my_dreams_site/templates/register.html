@@ -1,22 +1,48 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Регистрация</title>
+    <style>
+        .error { color: red; }
+        .flash { padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; }
+        .flash.success { background-color: #e0ffe0; }
+        .flash.danger { background-color: #ffe0e0; }
+    </style>
 </head>
 <body>
     <h1>Регистрация нового пользователя</h1>
-    <p>Заполните форму ниже, чтобы создать свою учетную запись. Это необходимо для того, чтобы вы могли отслеживать свои расходы и мечты!</p>
+    <p>Заполните форму ниже, чтобы создать свою учетную запись.</p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
     <form method="POST">
         {{ form.hidden_tag() }}
-        {{ form.email.label }} {{ form.email(size=32) }}<br>
-        {{ form.password.label }} {{ form.password(size=32) }}<br>
+
+        {{ form.email.label }}<br>
+        {{ form.email(size=32) }}<br>
+        {% for error in form.email.errors %}
+            <span class="error">{{ error }}</span><br>
+        {% endfor %}
+
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}<br>
+        {% for error in form.password.errors %}
+            <span class="error">{{ error }}</span><br>
+        {% endfor %}
+
         {{ form.submit() }}
     </form>
+
     <p><a href="{{ url_for('login') }}">Уже есть аккаунт? Войдите.</a></p>
     <a href="{{ url_for('home') }}">Вернуться на главную страницу</a>
 </body>
 </html>
-
+ 

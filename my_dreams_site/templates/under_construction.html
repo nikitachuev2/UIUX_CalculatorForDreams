@@ -1,13 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Функция в разработке</title>
+    <title>Финансовые советы</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 15px;
+        }
+
+        .tip {
+            background-color: #fff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #2980b9;
+        }
+    </style>
 </head>
 <body>
-    <h1>Функция в разработке</h1>
-    <p>Приносим извинения за доставленные неудобства. Данная функция в настоящее время находится в разработке и станет доступна в ближайшее время. Пожалуйста, следите за обновлениями!</p>
-    <a href="{{ url_for('home') }}">Вернуться на главную страницу</a>
+    <h1>Полезные финансовые советы</h1>
+    <p>Вот несколько действительно стоящих рекомендаций по управлению личными финансами. Прочитайте внимательно — возможно, именно они помогут вам изменить отношение к деньгам.</p>
+
+    <ul>
+        <li class="tip"><strong>Плати себе сначала.</strong> При каждом доходе откладывай минимум 10–20% на сбережения. Это создаёт "финансовую подушку" и даёт свободу выбора.</li>
+
+        <li class="tip"><strong>Живи по средствам, а не по желаниям.</strong> Если ты тратишь больше, чем зарабатываешь — ты работаешь на долги. Не на себя.</li>
+
+        <li class="tip"><strong>Следи за каждым рублём.</strong> Веди учёт доходов и расходов. Финансовая осознанность — первый шаг к контролю.</li>
+
+        <li class="tip"><strong>Раздели доход на категории:</strong> 50% — на нужды, 30% — на желания, 20% — на сбережения. Это простое правило поможет сбалансировать траты.</li>
+
+        <li class="tip"><strong>Инвестируй в знания.</strong> Прежде чем вкладывать деньги — вложи время в изучение. Грамотность защищает от потерь и даёт уверенность.</li>
+    </ul>
+
+    <a href="{{ url_for('home') }}">← Вернуться на главную страницу</a>
 </body>
 </html>
+ 
